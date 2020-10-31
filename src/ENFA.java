@@ -9,14 +9,14 @@ public class ENFA {
     }
 
     public boolean run(String w) {
-        Set<State> states = new HashSet<State>();//q.states(null);
+        Set<State> states = new HashSet<>();//q.states(null);
         states.add(q);
         states = eclosure(states);
 
         for (int k = 0; k < w.length(); k++) { // varrer simbolos de w: w[0] w[1] ... w[k]
             char ch = w.charAt(k);
 
-            Set<State> newStates = new HashSet<State>();
+            Set<State> newStates = new HashSet<>();
             for (State s : states) {
                 //Só para visão não interfere na lógica
                 System.out.print("[" + s.getName() + "]");
@@ -28,24 +28,31 @@ public class ENFA {
                 newStates = merge(newStates, s.states(ch));
                 newStates = eclosure(newStates);
             }
+
             states = newStates;
+
             if (states.size() == 0) break;
         }
+
+        System.out.println("--------------------");
         for (State s : states)
             System.out.print(s.getName() + " ");
         System.out.println();
+
         return valid(states);// verificar se existe algum estado final em states
     }
 
     private static Set<State> merge(Set<State> a, Set<State> b) {
-        Set<State> r = new HashSet<State>();
+        Set<State> r = new HashSet<>();
+
         for (State s : a) if (!r.contains(s)) r.add(s);
         for (State s : b) if (!r.contains(s)) r.add(s);
+
         return r;
     }
 
     public static Set<State> eclosure(Set<State> qs) {
-        Set<State> r = merge(new HashSet<State>(), qs);
+        Set<State> r = merge(new HashSet<>(), qs);
         for (State s : qs) {
             Set<State> a = s.states(null);
             Set<State> b = eclosure(a);
@@ -57,6 +64,7 @@ public class ENFA {
 
     public boolean valid(Set<State> qs) {
         if (qs == null || qs.size() == 0) return false;
+
         for (State s : qs)
             if (s.isFinal())
                 return true;
@@ -65,7 +73,7 @@ public class ENFA {
     }
 
     private void draw(String w, int k, Set<State> qs) {
-        System.out.print(w.substring(0, k) + "{");
+        System.out.print(w.substring(0, k) + "{ ");
         for (State s : qs) {
             System.out.print(s.getName() + " ");
         }
