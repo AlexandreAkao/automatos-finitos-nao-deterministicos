@@ -1,21 +1,21 @@
 import java.util.HashSet;
 import java.util.Set;
 
-public class NFA {
+public class ENFA {
     private State q;
 
-    public NFA(State q) {
+    public ENFA(State q) {
         this.q = q;
     }
 
     public boolean run(String w) {
-        Set<State> states = new HashSet<State>();
+        Set<State> states = new HashSet<>();
         states.add(q);
 
         for (int k = 0; k < w.length(); k++) {
             char ch = w.charAt(k);
 
-            Set<State> newStates = new HashSet<State>();
+            Set<State> newStates = new HashSet<>();
 
             for (State s : states) {
                 newStates = merge(newStates, s.states(ch));
@@ -26,11 +26,16 @@ public class NFA {
             if (states.size() == 0) break;
         }
 
+        for (State s: states) {
+            System.out.print(s.getName() + " ");
+        }
+        System.out.println();
+        
         return valid(states);
     }
 
     private static Set<State> merge(Set<State> a, Set<State> b) {
-        Set<State> r = new HashSet<State>();
+        Set<State> r = new HashSet<>();
 
         for (State s : a) if (!r.contains(s)) r.add(s);
         for (State s : b) if (!r.contains(s)) r.add(s);
