@@ -39,7 +39,7 @@ public class State {
     }
 
     public Set<State> states(Character ch) {
-        Set<State> r = new HashSet<State>();
+        Set<State> r = new HashSet<>();
 
         for (Transition t : this.transitions) {
             Edge e = t.getEdge();

@@ -16,7 +16,7 @@ public class Linguagens {
         q2.addTransition(q3, 'a');
         q2.addTransition(q3, 'b');
 
-        String w = "abaaabaabaa";
+        String w = "abaaabaaa";
         ENFA nfa = new ENFA(q0);
         checkout(nfa.run(w), w);
     }
@@ -41,9 +41,8 @@ public class Linguagens {
         q2.addTransition(q3, 'a');
         q3.addTransition(y, 'a');
 
-        String w = "aaa";
+        String w = "aaaaaa";
         ENFA nfa = new ENFA(q0);
-
         checkout(nfa.run(w), w);
     }
 
@@ -83,7 +82,7 @@ public class Linguagens {
         qx.setFinal();
         qy.setFinal();
 
-        String w = "aaa";
+        String w = "aaaaaa";
         ENFA nfa = new ENFA(q0);
         checkout(nfa.run(w), w);
         System.out.println("*****************************");
@@ -93,7 +92,7 @@ public class Linguagens {
         /*
          * L = { a^n in Σ^* | n par pode terminar com p, ou n divisivel por 3 e pode terminar com i}
          */
-        System.out.println("*****************************\nProcessamento de L1:");
+        System.out.println("*****************************\nProcessamento de L3:");
 
         State q0 = new State("q0");
         State q1 = new State("q1");
@@ -129,7 +128,7 @@ public class Linguagens {
          * - conjunto dos estados alcancados a partir de
          * p (incluindo p) por caminhos rotulados por 'e'.
          */
-        String w = "aaaaaap";
+        String w = "aap";
         ENFA nfa = new ENFA(q0);
         checkout(nfa.run(w), w);
         System.out.println("*****************************");
